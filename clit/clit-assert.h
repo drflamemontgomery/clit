@@ -71,6 +71,6 @@ int __clit_fail();
                 double: "Failure: Expected any value other than %lg\n",        \
                 long double: "Failure: Expected any value other than %Lg\n",   \
                 default: "Failure: Expected any value other than %p\n"),       \
-            EXPECTED, VALUE);
+            EXPECTED);
 
 #endif
