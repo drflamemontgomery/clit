@@ -22,6 +22,7 @@ typedef struct {
 
 #if CLIT_TEST_ENABLE
 
+#define CLIT_HELPER
 #define CLIT_TEST(NAME) void __clit_test_##NAME()
 
 #define CLIT_INCLUDE_MODULE(MODULE)                                            \
@@ -41,10 +42,11 @@ typedef struct {
 
 #else
 
+#define CLIT_HELPER UNUSED
 #define CLIT_TEST(NAME) UNUSED void __clit_test_##NAME()
 #define CLIT_INCLUDE_MODULE(MODULE)
 #define CLIT_MODULE(MODULE, ...)
-#define CLIT_REGISTER(NAME, DESCRIPTION, SHOULD_FAIL, IGNORE)
+#define CLIT_REGISTER(NAME, DESCRIPTION, ...)
 
 #endif
 
