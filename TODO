@@ -1,0 +1,14 @@
+- Descriptive test cases
+    Test cases descriptions should be shown to standard output. Figure out the best method of
+    displaying these descriptions to the user.
+
+- Exhaustive error messages
+    The error messaging system needs to be worked so that errors can be understood and located with
+    ease
+
+- Add better documentation
+
+- Replace relevant macros with inline functions
+    Many macros increases the likelihood of having unintentional functionality such as supplying i++
+    as an argument which could be used multiple times. Use inline functions to reduce these cases
+    wherever possible.
