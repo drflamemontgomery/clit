@@ -32,8 +32,19 @@ test_runner: $(TEST_OBJECTS) clt/clt.o
 
 .PHONY: test
 test: CFLAGS += -DCLT_TEST_ENABLE=1
+test: TEMPOBJFILE = $(shell mktemp).o
 test: test_runner
-	./test_runner
+	@./test_runner
+
+	@TEMP_FILE="$$(mktemp).o"; \
+	$(CC) $(CFLAGS) -DCLT_DCE_TEST=1 -c test/dce.c -o $$TEMP_FILE; \
+	grep "dce_remove" $$TEMP_FILE 2>&1 1>/dev/null && \
+	echo "Error: expected dce_remove to be removed in production code" && exit -1
+
+	@TEMP_FILE="$$(mktemp).o"; \
+	$(CC) $(CFLAGS) -DCLT_DCE_TEST=0 -c test/dce.c -o $$TEMP_FILE; \
+	grep "dce_remove" $$TEMP_FILE 2>&1 1>/dev/null && \
+	echo "Error: expected dce_remove to be kept in test code" && exit -1
 
 .PHONY: clean
 clean:
