@@ -1,6 +1,6 @@
-# C Lightweight Testing
+# CLT - C Lightweight Testing
 
-CLT is a lightweight unit testing framework built to be used in-line with C project code. 
+CLT is a lightweight unit testing framework built to be used inline with C project code. 
 Keep all your tests and logic in one file. 
 This project is inspired by [Unity Test](https://github.com/ThrowTheSwitch/Unity).
 
@@ -39,14 +39,34 @@ CLT_MODULE(foo,
 ```
 
 ```bash
-$ gcc -DCLT_TEST_ENABLE=1 main.c -o test_runner && ./test_runner
+$ gcc main.c -o test_runner
+$ ./test_runner
 ```
+## Compatibility
+
+### Tested:
+
+| OS | Compiler | Architecture | C Standard |
+|---|---|---|---|
+| Arch Linux | GCC 16.0.0 | x86_64 | C11 |
+
+### Expected to work
+
+- Linux distributions using GCC or Clang
+- macOS using Clang
+- Windows using MinGW
+
+### Currently untested
+
+- MSVC
+- Non-x86 architectures
 
 ## Notes
 
-Since the production code will inevitably contain the test code, I advise you to mark all of your test functions as `static` to allow the compiler to use dead-code elimination for production builds.
+The internals use custom sections to allow for dead-code elimination in production builds. Refer to the [Makefile](Makefile) for information on the flags to use for linking.
 
 ## Dedication
 
-To my amazing girlfriend, who always pushes me to finish my programming projects. 
-Someday I will get around to finishing them.
+Dedicated to my amazing girlfriend, who always encourages me to finish my programming projects.
+
+Someday I will get around to finishing them all.
