@@ -5,33 +5,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#if defined(__GNUC__)
-#define UNUSED __attribute__((unused))
-#define CLT_TEXT_SECTION __attribute((section (".clt_text")))
-#define CLT_MODULE_SECTION __attribute((section (".clt_module_rodata")))
-#define CLT_DATA_SECTION __attribute((section (".clt_data")))
-
-#elif defined(_MSC_VER) && (_MSC_VER > 1911)
-#pragma section(".clt_text", read)
-#pragma section(".clt_data", read)
-#pragma section(".clt_module_rodata", read)
-
-#define UNUSED [[maybe_unused]]
-#define CLT_TEXT_SECTION __declspec((section (".clt_text")))
-#define CLT_MODULE_SECTION __declspec((section (".clt_module_rodata")))
-#define CLT_DATA_SECTION __declspec((section (".clt_data")))
-
-#else
-#pragma section(".clt_text", read)
-#pragma section(".clt_data", read)
-#pragma section(".clt_module_rodata", read)
-
-#define UNUSED
-#define CLT_TEXT_SECTION __declspec((section (".clt_text")))
-#define CLT_MODULE_SECTION __declspec((section (".clt_module_rodata")))
-#define CLT_DATA_SECTION __declspec((section (".clt_data")))
-
-#endif
+#include "clt-internal.h"
 
 typedef void (*clt_test_cb)(void);
 typedef struct {
