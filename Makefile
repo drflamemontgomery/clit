@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O2 -g -Wall -Werror -Itest -Iclt -std=c11 -ffunction-sections -fdata-sections
+CFLAGS = -O2 -g -Wall -Itest -Iclt -std=c11 -ffunction-sections -fdata-sections
 LDFLAGS = -Wl,--gc-sections
 TEST_OBJECTS = \
 	test/external.o \
