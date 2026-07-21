@@ -10,6 +10,9 @@ typedef enum {
   IGNORE,
 } clt_test_status_t;
 
+/*
+ * Global state for test runner
+ */
 static struct {
   size_t num_of_tests;
   size_t passed;
@@ -20,6 +23,9 @@ static struct {
   const clt_test_info_t *current_test;
 } clt_test_runner_data CLT_DATA_SECTION;
 
+/*
+ * Initialize Global state to begin running tests
+ */
 CLT_TEXT_SECTION void clt_setup() {
   clt_test_runner_data.passed = 0;
   clt_test_runner_data.failures = 0;
@@ -28,6 +34,11 @@ CLT_TEXT_SECTION void clt_setup() {
   clt_test_runner_data.current_test = NULL;
 }
 
+/*
+ * Print Test results and run cleanup routines
+ *
+ * @return 0 if success, 1 if fail
+ */
 CLT_TEXT_SECTION int clt_end() {
   printf("\n----------------\n"
          "%ld Tests "
@@ -41,6 +52,9 @@ CLT_TEXT_SECTION int clt_end() {
   return clt_test_runner_data.failures != 0;
 }
 
+/*
+ * Run Test from test_info structure
+ */
 CLT_TEXT_SECTION void clt_run_test(const clt_test_info_t *info) {
   clt_test_runner_data.num_of_tests++;
   clt_test_runner_data.current_test = info;
@@ -78,6 +92,9 @@ CLT_TEXT_SECTION void clt_run_test(const clt_test_info_t *info) {
   }
 }
 
+/*
+ * Set global failure state
+ */
 CLT_TEXT_SECTION int clt_fail() {
   if (clt_test_runner_data.current_test == NULL)
     return 1;
